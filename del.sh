@@ -1,0 +1,10 @@
+./user/.svn
+./user/.svn/prop-base
+./user/.svn/props
+./user/.svn/tmp
+./user/.svn/tmp/prop-base
+./user/.svn/tmp/props
+./user/.svn/tmp/text-base
+./user/.svn/entries
+./user/.svn/format
+./user/.svn/text-base
