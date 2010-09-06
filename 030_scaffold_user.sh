@@ -3,7 +3,19 @@ NAME='user'
 
 function up () {
 #    ${SCRIPT_DIR}/generate scaffold ${NAME} name:string username:string password:string email:string
-    ${SCRIPT_DIR}/generate scaffold ${NAME} userid:string password:string creation_date:date first_name:string last_name:string address:string city:string state:string zipcode:string phone_number:string email:string optin:integer
+    ${SCRIPT_DIR}/generate scaffold ${NAME} \
+	userid:string \
+	password:string \
+	creation_date:date \
+	first_name:string \
+	last_name:string \
+	address:string \
+	city:string \
+	state:string \
+	zipcode:string \
+	phone_number:string \
+	email:string \
+	optin:integer
     
     rake db:migrate
 }
@@ -17,10 +29,10 @@ function edit_model () {
 
 validates_presence_of :userid
 validates_uniqueness_of :userid
+validates_presence_of :creation_date
 validates_presence_of :firstname
 validates_presence_of :lastname
 validates_presence_of :password
-validates_presence_of :creation_date
 validates_presence_of :phone_number
 validates_presence_of :email
 validates_presence_of :optin
@@ -33,28 +45,6 @@ up
 edit_model
 
 exit
-StyleRX Server design information
-=================================
-
-Troy Will <troydwill@gmail.com>
-StyleRx Server design information
-Wayne Packard <wpackard@mac.com> Fri, Sep 3, 2010 at 10:07 PM
-To: Troy Will <troydwill@gmail.com>
-Cc: Nick Alt <nalt@clear-media.com>, Jason Buzzeo
-<jason.buzzeo@gmail.com>, Joshua Stearns <joshuastearns@gmail.com>
-Hi Troy,
-
-Thanks again for meeting with us today!
-
-I've attached some of the information we discussed. The PDF is Apple's
-documentation for StoreKit, which is their API for doing in-app
-purchases on iOS devices. Most of the parts of the document won't
-involve our server directly, but a few pieces apply. At least it will
-give you an overview of the entire process. Note that this only
-applies to our iPhone app. The Flash client will need to do purchasing
-in a completely different way.
-
-Below is the list of fields we have for the user table:
 
 UserID - we're planning to use the email address as the user ID. It's
 a primary key and we'll need to ensure uniqueness
