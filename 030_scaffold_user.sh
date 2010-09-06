@@ -17,11 +17,7 @@ function up () {
 	email:string \
 	optin:integer
     
-    rake db:migrate
-}
-
-function down () {
-    echo
+    echo "Running rake db:migrate" && rake db:migrate
 }
 
 function edit_model () {
@@ -30,9 +26,12 @@ function edit_model () {
 validates_presence_of :userid
 validates_uniqueness_of :userid
 validates_presence_of :creation_date
-validates_presence_of :first_tname
+validates_presence_of :first_name
 validates_presence_of :last_name
-validates_presence_of :password
+validates_presence_of :address
+validates_presence_of :city
+validates_presence_of :state
+validates_presence_of :zipcode
 validates_presence_of :phone_number
 validates_presence_of :email
 validates_presence_of :optin
