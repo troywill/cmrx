@@ -30,8 +30,8 @@ function edit_model () {
 validates_presence_of :userid
 validates_uniqueness_of :userid
 validates_presence_of :creation_date
-validates_presence_of :firstname
-validates_presence_of :lastname
+validates_presence_of :first_tname
+validates_presence_of :last_name
 validates_presence_of :password
 validates_presence_of :phone_number
 validates_presence_of :email
