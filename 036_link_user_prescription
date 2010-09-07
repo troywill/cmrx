@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 #### Begin section: Edit these variables for the spin box to the foreign key ####
-my $child = 'item'; # The child table singularized, e.g. 'item' or 
-my $foreign_model = 'Location'; # The foreign model, e.g. 'Location'. This will be on the html form spin box
-my $foreign_key = 'location_id'; # The foreign key in the child table, e.g. 'location_id'
-my $foreign_attribute = 'name'; # The thing you want to lookup in the foreign table e.g. 'name'
+my $child = 'prescription'; # The child table singularized, e.g. 'item' or 
+my $foreign_model = 'User'; # The foreign model, e.g. 'Location'
+my $foreign_key = 'userid'; # The foreign key in the child table, e.g. 'location_id'
+my $foreign_attribute = 'userid'; # The thing you want to lookup in the foreign table e.g. 'name'
 #### End section: Edit these variables ####
 
 sub spin_box {
