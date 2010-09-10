@@ -16,9 +16,9 @@ function generate_scaffold () {
 	email:string \
 	email_opt_in:character \
 	skin_tone_id: integer \
-	hair_color_id: integer"
+	hair_color_id:integer"
 
-    echo "generating scaffold ==> ${COMMAND}" && sleep 1 && ${COMMAND}
+    echo "generating scaffold ==> ${COMMAND}" && sleep 3 && ${COMMAND}
 }
 
 function edit_model () {
@@ -44,6 +44,7 @@ EOF
 }
 
 generate_scaffold
+sleep 3
 edit_model
 echo "Edit migration for default values and run migration => rake db:migrate"
 
