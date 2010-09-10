@@ -15,10 +15,10 @@ function generate_scaffold () {
 	phone_number:string \
 	email:string \
 	email_opt_in:character \
-	skin_tone_id: integer \
+	skin_tone_id:integer \
 	hair_color_id:integer"
 
-    echo "generating scaffold ==> ${COMMAND}" && sleep 3 && ${COMMAND}
+    echo "==> ${COMMAND} >> ${LOGFILE}" && ${COMMAND}
 }
 
 function edit_model () {
