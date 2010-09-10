@@ -1,10 +1,9 @@
 source ./tdw-lib.sh
 NAME='user'
 
-function up () {
-#    ${SCRIPT_DIR}/generate scaffold ${NAME} name:string username:string password:string email:string
-    ${SCRIPT_DIR}/generate scaffold ${NAME} \
-	userid:string \
+function generate_scaffold () {
+    COMMAND="${SCRIPT_DIR}/generate scaffold ${NAME} \
+	user_id:string \
 	password:string \
 	creation_date:date \
 	first_name:string \
@@ -15,14 +14,16 @@ function up () {
 	zipcode:string \
 	phone_number:string \
 	email:string \
-	optin:integer
-    
-    echo "Running rake db:migrate" && rake db:migrate
+	email_opt_in:character \
+	skin_tone_id: integer \
+	hair_color_id: integer"
+
+    echo "generating scaffold ==> ${COMMAND}" && sleep 1 && ${COMMAND}
 }
 
 function edit_model () {
     cat >> ${TOP_DIR}/app/models/${NAME}.rb <<EOF
-
+# Per Nick Alt Sep. 9, 2010 All fields are required
 validates_presence_of :userid
 validates_uniqueness_of :userid
 validates_presence_of :password
@@ -35,15 +36,16 @@ validates_presence_of :state
 validates_presence_of :zipcode
 validates_presence_of :phone_number
 validates_presence_of :email
-validates_presence_of :optin
-validates_numericality_of :optin
-
+validates_presence_of :email_opt_in
+validates_numericality_of :email_opt_in
 EOF
-    $EDITOR ${TOP_DIR}/app/models/${NAME}.rb
+    COMMAND="$EDITOR ${TOP_DIR}/app/models/${NAME}.rb"
+    echo "==> ${COMMAND}" && sleep 1 && ${COMMAND}
 }
 
-up
+generate_scaffold
 edit_model
+echo "Edit migration for default values and run migration => rake db:migrate"
 
 exit
 
