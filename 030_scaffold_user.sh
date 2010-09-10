@@ -14,11 +14,11 @@ function generate_scaffold () {
 	zipcode:string \
 	phone_number:string \
 	email:string \
-	email_opt_in:character \
+	email_opt_in:char \
 	skin_tone_id:integer \
 	hair_color_id:integer"
 
-    echo "==> ${COMMAND} >> ${LOGFILE}" && ${COMMAND}
+    echo "==> ${COMMAND}" >> ${LOGFILE} && ${COMMAND}
 }
 
 function edit_model () {
@@ -38,13 +38,16 @@ validates_presence_of :phone_number
 validates_presence_of :email
 validates_presence_of :email_opt_in
 validates_numericality_of :email_opt_in
+validates_presence_of :skin_tone_id
+validates_numericality_of :skin_tone_id
+validates_presence_of :hair_color_id
+validates_numericality_of :hair_color_id
 EOF
     COMMAND="$EDITOR ${TOP_DIR}/app/models/${NAME}.rb"
-    echo "==> ${COMMAND}" && sleep 1 && ${COMMAND}
+    echo "==> ${COMMAND}" && ${COMMAND}
 }
 
 generate_scaffold
-sleep 3
 edit_model
 echo "Edit migration for default values and run migration => rake db:migrate"
 
