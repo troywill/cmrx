@@ -14,7 +14,7 @@ function generate_scaffold () {
 	zipcode:string \
 	phone_number:string \
 	email:string \
-	email_opt_in:char \
+	email_opt_in:integer \
 	skin_tone_id:integer \
 	hair_color_id:integer"
 
@@ -24,8 +24,8 @@ function generate_scaffold () {
 function edit_model () {
     cat >> ${TOP_DIR}/app/models/${NAME}.rb <<EOF
 # Per Nick Alt Sep. 9, 2010 All fields are required
-validates_presence_of :userid
-validates_uniqueness_of :userid
+validates_presence_of :user_id
+validates_uniqueness_of :user_id
 validates_presence_of :password
 validates_presence_of :creation_date
 validates_presence_of :first_name
