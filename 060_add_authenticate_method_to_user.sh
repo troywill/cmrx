@@ -23,17 +23,4 @@ EOF
 
 add_authenticate_method
 
-
-
 exit
-# See page 163
-def self.authenticate(username, password)
-  user = self.find_by_username(username)
-  if user
-    if user.password != password
-      user = nil
-    end
-  end
-  user
-end
-EOF
