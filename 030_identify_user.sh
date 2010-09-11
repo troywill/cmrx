@@ -22,8 +22,8 @@ EOF
     cat >> ${APPLICATION_CONTROLLER} <<EOF
 # See page 178
 def identify_user
-  if User.find_by_id(session[:user_id])
-    @user = User.find_by_id(session[:user_id])
+  if User.find_by_id(session[:register_email])
+    @user = User.find_by_id(session[:register_email])
   else
     flash[:notice] = "Please log in"
     redirect_to :controller => :welcome, :action => :login
