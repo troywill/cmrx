@@ -3,7 +3,7 @@ NAME='user'
 
 function generate_scaffold () {
     COMMAND="rails generate scaffold ${NAME} \
-	user_id:string \
+	register_email:string \
 	password:string \
 	creation_date:date \
 	first_name:string \
