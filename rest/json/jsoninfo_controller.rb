@@ -6,6 +6,3 @@ class JsoninfoController < ApplicationController
     end
   end
 end
-
-
-

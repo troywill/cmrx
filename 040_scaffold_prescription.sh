@@ -1,47 +1,47 @@
 source ./tdw-lib.sh
 NAME='prescription'
 
-function up () {
+function generate_scaffold () {
 
     ${SCRIPT_DIR}/generate scaffold ${NAME} \
-	userid:string \
-	requestDate:datetime \
-	availableDate:datetime \
-	clientType:integer \
+	user_id:string \
+	request_date:datetime \
+	available_date:datetime \
+	client_type:integer \
 	height:integer \
-	bustMeasurement:integer \
-	waistMeasurement:integer \
-	hipMeasurement:integer \
+	bust_measurement:integer \
+	waist_measurement:integer \
+	hip_measurement:integer \
 	heels:integer \
-	skinIssues:integer \
-	productID:string \
-	transactionID:string
-    
-    echo "Running rake db:migrate" && rake db:migrate
+	skin_issues:integer \
+	product_id:string \
+	transaction_id:string
 }
 
 function edit_model () {
     cat >> ${TOP_DIR}/app/models/${NAME}.rb <<EOF
-validates_presence_of :userid
-validates_presence_of :requestDate
-validates_presence_of :availableDate
-validates_presence_of :clientType
+validates_presence_of :user_id
+validates_presence_of :request_date
+validates_presence_of :available_date
+validates_presence_of :client_type
 validates_presence_of :height
-validates_presence_of :bustMeasurement
-validates_presence_of :waistMeasurement
-validates_presence_of :hipMeasurement
+validates_presence_of :bust_measurement
+validates_presence_of :waist_measurement
+validates_presence_of :hip_measurement
 validates_presence_of :heels
-validates_presence_of :skinIssues
-validates_presence_of :productID
-validates_presence_of :transactionID
+validates_presence_of :skin_issues
+validates_presence_of :product_id
+validates_presence_of :transaction_id
 
 EOF
     $EDITOR ${TOP_DIR}/app/models/${NAME}.rb
 }
 
-up
+$EDITOR ${TOP_DIR}/db/
+generate_scaffold
 edit_model
 
+echo "Running rake db:migrate" && rake db:migrate
 exit
 Prescriptions table
 
