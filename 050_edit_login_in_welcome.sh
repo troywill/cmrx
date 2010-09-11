@@ -5,11 +5,11 @@ function edit_login_method () {
 
 cat >> ${WELCOME_CONTROLLER} <<EOF
 def login
-  session[:user_id] = nil
+  session[:register_email] = nil
   if request.post?
-    user = User.authenticate(params[:user_id], params[:password])
+    user = User.authenticate(params[:register_email], params[:password])
     if user
-      session[:user_id] = user.id
+      session[:register_email] = user.id
       redirect_to(:action => "index" )
     else
       flash.now[:notice] = "Invalid user/password combination"
