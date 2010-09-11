@@ -52,6 +52,8 @@ generate_scaffold
 edit_model
 echo "Edit migration for default values and run migration => rake db:migrate"
 ${EDITOR} ${TOP_DIR}/db
+echo 'cp -i seeds.rb ../../../db/' && cp -i seeds.rb ../../../db/
+echo 'rake db:seed' && rake db:seed
 
 exit
 
