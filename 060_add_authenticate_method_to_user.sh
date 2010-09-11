@@ -6,8 +6,8 @@ function add_authenticate_method () {
 
     cat >> ${USER_MODEL} <<EOF
 # See page 163
-def self.authenticate(username, password)
-  user = self.find_by_username(username)
+def self.authenticate(register_email, password)
+  user = self.find_by_register_email(register_email)
   if user
     if user.password != password
       user = nil
@@ -22,3 +22,18 @@ EOF
 }
 
 add_authenticate_method
+
+
+
+exit
+# See page 163
+def self.authenticate(username, password)
+  user = self.find_by_username(username)
+  if user
+    if user.password != password
+      user = nil
+    end
+  end
+  user
+end
+EOF
