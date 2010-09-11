@@ -37,4 +37,3 @@ ${EDITOR} ${APPLICATION_CONTROLLER}
 
 check_admin_user
 add_before_filter_to_application_controller
-restart_server

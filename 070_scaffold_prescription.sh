@@ -3,7 +3,8 @@ NAME='prescription'
 
 function generate_scaffold () {
 
-    ${SCRIPT_DIR}/generate scaffold ${NAME} \
+#     ${SCRIPT_DIR}/generate scaffold ${NAME} \
+    rails generate scaffold ${NAME} \
 	user_id:string \
 	request_date:datetime \
 	available_date:datetime \
