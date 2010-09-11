@@ -8,8 +8,8 @@ cat >> ${LOGIN_PAGE} <<EOF
   <legend>Please Log In</legend>
   <% form_tag do %>
     <p>
-      <label for="name">Username:</label>
-      <%= text_field_tag :username, params[:username] %>
+      <label for="name">Email:</label>
+      <%= text_field_tag :register_email, params[:register_email] %>
     </p>
     <p>
       <label for="password">Password:</label>
