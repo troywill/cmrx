@@ -1,8 +1,8 @@
 source ./tdw-lib.sh
-NAME='user'
+SCAFFOLD_NAME='user'
 
 function generate_scaffold () {
-    COMMAND="rails generate scaffold ${NAME} \
+    COMMAND="rails generate scaffold ${SCAFFOLD_NAME} \
 	register_email:string \
 	password:string \
 	creation_date:date \
@@ -22,10 +22,11 @@ function generate_scaffold () {
 }
 
 function edit_model () {
-    cat >> ${TOP_DIR}/app/models/${NAME}.rb <<EOF
+    cat >> ${TOP_DIR}/app/models/${SCAFFOLD_NAME}.rb <<EOF
 # Per Nick Alt Sep. 9, 2010 All fields are required
-validates_presence_of :user_id
-validates_uniqueness_of :user_id
+# TDW renamed user_id to register_email because of user_id name confusion in session array
+validates_presence_of :register_email
+validates_uniqueness_of :register_email
 validates_presence_of :password
 validates_presence_of :creation_date
 validates_presence_of :first_name
@@ -43,13 +44,14 @@ validates_numericality_of :skin_tone_id
 validates_presence_of :hair_color_id
 validates_numericality_of :hair_color_id
 EOF
-    COMMAND="$EDITOR ${TOP_DIR}/app/models/${NAME}.rb"
+    COMMAND="$EDITOR ${TOP_DIR}/app/models/${SCAFFOLD_NAME}.rb"
     echo "==> ${COMMAND}" && ${COMMAND}
 }
 
 generate_scaffold
 edit_model
 echo "Edit migration for default values and run migration => rake db:migrate"
+${EDITOR} ${TOP_DIR}/db
 
 exit
 
