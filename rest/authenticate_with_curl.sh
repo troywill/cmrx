@@ -17,7 +17,9 @@ write_cookie () {
 }
 
 retrieve_record () {
-    curl --cookie ${COOKIE_FILE} ${RECORD_URL}
+    curl --cookie ${COOKIE_FILE} ${RECORD_URL} > data.html
+    curl --cookie ${COOKIE_FILE} ${RECORD_URL}.json > data.json
+    curl --cookie ${COOKIE_FILE} ${RECORD_URL}.yml > data.yml
 }
 
 clear_password () {

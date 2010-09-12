@@ -1,9 +1,8 @@
 source ./tdw-lib.sh
-SCAFFOLD_NAME='dummy'
-PLURAL_SCAFFOLD_NAME='dummies'
+NAME='content_file'
 
 function up () {
-    ${SCRIPT_DIR}/generate scaffold ${SCAFFOLD_NAME} name:string username:string password:string email:string
+    ${SCRIPT_DIR}/generate model ${NAME} register_email:string avail_interval:integer download_file:integer
     rake db:migrate
 }
 
@@ -12,7 +11,7 @@ function down () {
 }
 
 function edit_model () {
-    MODEL="${TOP_DIR}/app/models/${SCAFFOLD_NAME}.rb"
+    MODEL="${TOP_DIR}/app/models/${NAME}.rb"
     cat >> ${MODEL} <<EOF
 
 validates_presence_of :name
