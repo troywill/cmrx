@@ -1,3 +1,7 @@
+#!/bin/bash
+rails generate controller CustomPrescription retrieve
+exit
+
 Usage:
   rails generate controller NAME [action action] [options]
 
