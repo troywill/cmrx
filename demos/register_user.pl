@@ -26,25 +26,36 @@ my %user = (
     );
 
 
+
+sub menu {
+    print "\n\n+-------------- Prescription RX Menu --------------+\n";
+    print "|\tQ to quit\n";
+  print "| 1. Show current User hash in JSON\n";
+  print "| 2. Edit User data\n";
+  print "| 3. Register a new User (POST JSON User hash to $server/users)\n";
+  print "| 4. Display registered users\n";
+  print "| Choice? ";
+}
+
 while ( 1 ) {
   &menu;
   chomp( my $input = <STDIN> );
   &print_json_hash(\%user) if $input eq '1';
-  &register_user if $input eq '2';
-  &display_registered_users if $input eq '3';
+  &edit_user_hash if $input eq '2';
+  &register_user if $input eq '3';
+  &display_registered_users if $input eq '4';
   last if $input eq 'q';
   last if $input eq 'Q';
 }
 
 
 sub edit_user_hash {
-    print "Email? "; chomp( my $email = <STDIN> ); %user{'register_email'} = $email;
-    print "Hips? "; chomp( my $hips = <STDIN> ); %user{'hips'} = $hips;
-    print "Bust? "; chomp( my $bust = <STDIN> ); %user{'bust'} = $bust;
-    print "Waist? "; chomp( my $waist = <STDIN> ); %user{'waist'} = $waist;
-    print "Height? "; chomp( my $height = <STDIN> ); %user{'height'} = $height;
+    print "Email? "; chomp( my $email = <STDIN> ); $user{'register_email'} = $email;
+    print "Hips (e.g. 39) ? "; chomp( my $hips = <STDIN> ); $user{'hips'} = $hips;
+    print "Bust (e.g. 39) ? "; chomp( my $bust = <STDIN> ); $user{'bust'} = $bust;
+    print "Waist (e.g. 26) ? "; chomp( my $waist = <STDIN> ); $user{'waist'} = $waist;
+    print "Height (e.g. 66) ? "; chomp( my $height = <STDIN> ); $user{'height'} = $height;
 }
-
 
 sub display_registered_users {
     print "\n+-----------------------------------------------------------\n";
@@ -81,11 +92,3 @@ sub register_user {
   print "\n\n";
 }
 
-sub menu {
-    print "\n\n+-------------- Prescription RX Menu --------------+\n";
-    print "|\tQ to quit\n";
-  print "| 1. Show current User hash in JSON\n";
-  print "| 2. Register a new User (POST JSON User hash to $server/users)\n";
-  print "| 3. Display registered users\n";
-  print "| Choice? ";
-}
