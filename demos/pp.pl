@@ -60,22 +60,22 @@ sub edit_user_hash {
 }
 
 sub display_registered_users {
-    print "\n+-----------------------------------------------------------\n";
+    print "\n+---------------------------------------------------------------\n";
     print "| Registered Users, viewable at $server/users\n";
     print "| or $server/users.json\n";
     print "| or $server/users.xml\n";
-    print "+------------------------------------------------------------n";
-
+    print "|\n";
       my $curl_get_command = "curl --header 'Content-Type:application/json' --header 'Accept:application/json' --request GET $server/users 2>/dev/null";
-      print "\n==> $curl_get_command\n";
+      # print "\n==> $curl_get_command\n";
       my $server_response= `$curl_get_command`;
-      print "\n>>> Server JSON response <<<\n";
-      print $server_response;
+      # print "\n>>> Server JSON response <<<\n";
+      # print $server_response;
       my $perl_arrayref  = decode_json $server_response;
-      print "==> $perl_arrayref <==\n";
+      # print "==> $perl_arrayref <==\n";
       for my $href ( @{$perl_arrayref} ) {
-	  print "id: $href->{'user'}->{'id'}, $href->{'user'}->{'register_email'}, registered at $href->{'user'}->{'created_at'}\n";
+	  print "| id: $href->{'user'}->{'id'}, $href->{'user'}->{'register_email'}, registered at $href->{'user'}->{'created_at'}\n";
       }
+    print "+--------------------------------------------------------------\n";
 }
 
 sub print_json_hash {
