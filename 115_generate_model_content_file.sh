@@ -2,8 +2,8 @@ source ./tdw-lib.sh
 NAME='content_file'
 
 function up () {
-    ${SCRIPT_DIR}/generate model ${NAME} register_email:string avail_interval:integer download_file:integer
-    rake db:migrate
+#    ${SCRIPT_DIR}/generate model ${NAME} register_email:string avail_interval:integer download_file:integer
+    rails generate model ${NAME} register_email:string avail_interval:integer download_file:integer
 }
 
 function down () {
@@ -38,5 +38,5 @@ function migration () {
 
 up
 edit_model
-edit_welcome_view
-migration
+# edit_welcome_view
+# migration
