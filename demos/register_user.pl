@@ -16,7 +16,7 @@ my %user = (
 	      user => {
 		  register_email => 'troydwill@gmail.com',
 		  register_ipv6 => $register_ipv6,
-		  ios_device_indentifier => $ios_device_identifier,
+		  ios_device_identifier => $ios_device_identifier,
 		  ios_device_type_id => $ios_device_type_id,
 		  hips => $hips,
 		  bust => $bust,
@@ -31,10 +31,23 @@ while ( 1 ) {
   chomp( my $input = <STDIN> );
   &print_json_hash(\%user) if $input eq '1';
   &register_user if $input eq '2';
+  &display_registered_users if $input eq '3';
   last if $input eq 'q';
   last if $input eq 'Q';
 }
 
+sub display_registered_users {
+      my $curl_get_command = "curl --header 'Content-Type:application/json' --header 'Accept:application/json' --request GET $server/users 2>/dev/null";
+      print "\n==> $curl_get_command\n";
+      my $server_response= `$curl_get_command`;
+      print "\n>>> Server JSON response <<<\n";
+      print $server_response;
+      my $perl_arrayref  = decode_json $server_response;
+      print "==> $perl_arrayref <==\n";
+      for my $href ( @{$perl_arrayref} ) {
+	  print "id: $href->{'user'}->{'id'}, $href->{'user'}->{'register_email'}\n";
+      }
+}
 
 sub print_json_hash {
     my $hash_ref = shift;
@@ -55,7 +68,8 @@ sub register_user {
 sub menu {
     print "\n\n+-------------- Prescription RX Menu --------------+\n";
     print "|\tQ to quit\n";
-  print "| 1. Print current User hash in JSON\n";
+  print "| 1. Show current User hash in JSON\n";
   print "| 2. Register a new User (POST JSON User hash to $server/users)\n";
+  print "| 3. Display registered users\n";
   print "| Choice? ";
 }
