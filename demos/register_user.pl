@@ -36,7 +36,23 @@ while ( 1 ) {
   last if $input eq 'Q';
 }
 
+
+sub edit_user_hash {
+    print "Email? "; chomp( my $email = <STDIN> ); %user{'register_email'} = $email;
+    print "Hips? "; chomp( my $hips = <STDIN> ); %user{'hips'} = $hips;
+    print "Bust? "; chomp( my $bust = <STDIN> ); %user{'bust'} = $bust;
+    print "Waist? "; chomp( my $waist = <STDIN> ); %user{'waist'} = $waist;
+    print "Height? "; chomp( my $height = <STDIN> ); %user{'height'} = $height;
+}
+
+
 sub display_registered_users {
+    print "\n+-----------------------------------------------------------\n";
+    print "| Registered Users, viewable at $server/users\n";
+    print "| or $server/users.json\n";
+    print "| or $server/users.xml\n";
+    print "+------------------------------------------------------------n";
+
       my $curl_get_command = "curl --header 'Content-Type:application/json' --header 'Accept:application/json' --request GET $server/users 2>/dev/null";
       print "\n==> $curl_get_command\n";
       my $server_response= `$curl_get_command`;
@@ -45,7 +61,7 @@ sub display_registered_users {
       my $perl_arrayref  = decode_json $server_response;
       print "==> $perl_arrayref <==\n";
       for my $href ( @{$perl_arrayref} ) {
-	  print "id: $href->{'user'}->{'id'}, $href->{'user'}->{'register_email'}\n";
+	  print "id: $href->{'user'}->{'id'}, $href->{'user'}->{'register_email'}, registered at $href->{'user'}->{'created_at'}\n";
       }
 }
 
