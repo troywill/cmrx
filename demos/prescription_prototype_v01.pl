@@ -33,7 +33,8 @@ sub menu {
   print "| 1. Show current User hash in JSON\n";
   print "| 2. Edit User data\n";
   print "| 3. Register a new User (POST JSON User hash to $server/users)\n";
-  print "| 4. Display registered users\n";
+  print "| 4. Retrieve prescription .zip file\n";
+  print "| 5. Display registered users\n";
   print "| Choice? ";
 }
 
@@ -43,7 +44,8 @@ while ( 1 ) {
   &print_json_hash(\%user) if $input eq '1';
   &edit_user_hash if $input eq '2';
   &register_user if $input eq '3';
-  &display_registered_users if $input eq '4';
+  &retrieve_prescription if $input eq '4';
+  &display_registered_users if $input eq '5';
   last if $input eq 'q';
   last if $input eq 'Q';
 }
