@@ -50,11 +50,11 @@ while ( 1 ) {
 
 
 sub edit_user_hash {
-    print "Email? "; chomp( my $email = <STDIN> ); $user{'register_email'} = $email;
-    print "Hips (e.g. 39) ? "; chomp( my $hips = <STDIN> ); $user{'hips'} = $hips;
-    print "Bust (e.g. 39) ? "; chomp( my $bust = <STDIN> ); $user{'bust'} = $bust;
-    print "Waist (e.g. 26) ? "; chomp( my $waist = <STDIN> ); $user{'waist'} = $waist;
-    print "Height (e.g. 66) ? "; chomp( my $height = <STDIN> ); $user{'height'} = $height;
+    print "Email? "; chomp( my $email = <STDIN> ); $user{user}{register_email} = $email;
+    print "Hips (e.g. 39) ? "; chomp( my $hips = <STDIN> ); $user{user}{hips} = $hips;
+    print "Bust (e.g. 39) ? "; chomp( my $bust = <STDIN> ); $user{user}{bust} = $bust;
+    print "Waist (e.g. 26) ? "; chomp( my $waist = <STDIN> ); $user{user}{waist} = $waist;
+    print "Height (e.g. 66) ? "; chomp( my $height = <STDIN> ); $user{user}{height} = $height;
 }
 
 sub display_registered_users {
