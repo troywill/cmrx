@@ -1,18 +1,13 @@
 #!/usr/bin/env perl
 use warnings;
 use strict;
-
-my $host = 'http://stylerx.ath.cx';
-# http://stylerx.ath.cx/users/1.xml?api_key=784da8554937a966ec97aec8ed1ec659e25e334b
-
-my $url = "${host}/users/1.json";
-$url = 'http://stylerx.ath.cx/users/1.json?api_key=784da8554937a966ec97aec8ed1ec659e25e334b';
-
 use LWP::UserAgent;
 use JSON;
 
-# # Initialize the UserAgent object and send the request.
-# # Notice that referer is set manually to a URL string.
+my $host = 'http://stylerx.ath.cx';
+my $api_key = '784da8554937a966ec97aec8ed1ec659e25e334b';
+my $url = 'http://stylerx.ath.cx/users/1.json?api_key=784da8554937a966ec97aec8ed1ec659e25e334b';
+
 my $ua = LWP::UserAgent->new();
 my $body = $ua->get($url);
 print keys%{$body};
