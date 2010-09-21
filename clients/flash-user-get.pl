@@ -5,8 +5,9 @@ use LWP::UserAgent;
 use JSON;
 
 my $host = 'http://stylerx.ath.cx';
-my $api_key = '784da8554937a966ec97aec8ed1ec659e25e334b';
-my $url = 'http://stylerx.ath.cx/users/1.json?api_key=784da8554937a966ec97aec8ed1ec659e25e334b';
+my $iphone_api_key = '784da8554937a966ec97aec8ed1ec659e25e334b';
+my $flash_api_key = '4356e1973d1cf09a450d2704afc35d0e5be2304e';
+my $url = "${host}/users/1.json?api_key=${$flash_api_key}";
 
 my $ua = LWP::UserAgent->new();
 my $body = $ua->get($url);

@@ -9,12 +9,23 @@ my $api_key = '784da8554937a966ec97aec8ed1ec659e25e334b';
 my $url = 'http://stylerx.ath.cx/users/1.json?api_key=784da8554937a966ec97aec8ed1ec659e25e334b';
 
 my $ua = LWP::UserAgent->new();
-my $body = $ua->get($url);
-print keys%{$body};
-print "==> ${$body}{_msg}\n";
-print "==> ${$body}{_content}\n";
+
+sub get_user {
+    my $body = $ua->get($url);
+    print keys%{$body};
+    print "==> ${$body}{_msg}\n";
+    print "==> ${$body}{_content}\n";
+}
+
+my $xml_text = '<?xml version="1.0" encoding="UTF-8"?><user><email>john.doe@site.com</email><first-name>John</first-name><last-name>Doe</last-name></user>';
+my $response = $ua->post ( "$host/users&api_key", Content => $xml_text, 'Content-Type' => 'application/xml' );
+print "==> ${$response}{_content}\n";
 
 exit;
+
+
+# Example body of POST request:
+    
 # $ua->default_header("HTTP_REFERER" => 'localhost' );
 # my $body = $ua->get($url);
 
@@ -30,7 +41,7 @@ my $json_text = encode_json \%hash_of_hash;
 # my $response = $ua->(  my $curl_post_command = "curl --header 'Content-Type:application/json' --header 'Accept:application/json' --data '$json_text' $server/users 2>/dev/null";
 
 
-my $response = $ua->post ( "$host/users", Content => $json_text, 'Content-Type' => 'application/json' );
+$response = $ua->post ( "$host/users", Content => $json_text, 'Content-Type' => 'application/json' );
 print "==> $response <==\n";
 
 $response = $ua->get ( "$host/users/1.xml&api_key=784da8554937a966ec97aec8ed1ec659e25e334b", Content => $json_text, 'Content-Type' => 'application/json' );
