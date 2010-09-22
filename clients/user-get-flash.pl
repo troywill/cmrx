@@ -32,9 +32,18 @@ my %HoH = (
 # print ${$user}{'user'}{'email'}, "\n";
 &show_user_schema;
 &get_user;
+&create_user;
 
 sub create_user {
-    
+    use String::Random qw(random_regex random_string);
+# print random_regex('\d\d\d'); # Also prints 3 random digits
+# print random_string("...");   # Also prints 3 random printable characters
+    my $random_email = 'jane_' . random_regex('\d\d\d') . '@clear-media.com';
+    print $random_email;
+    my $ua = LWP::UserAgent->new();
+    my $json_text = '{"user":{"last_name":"Last","first_name":"First","email":"' . $random_email . '"}}';
+    my $response = $ua->post ( "$host/users.json?api_key=$flash_api_key", Content => $json_text, 'Content-Type' => 'application/json' );
+}    
 
 sub get_user {
     print "In sub get_user ...\n";
