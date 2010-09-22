@@ -1,13 +1,15 @@
 #!/bin/bash
-# Example program to add a new user RESTfully with curl POSTing of XML data
+# Example program to add a new prescripion with curl POSTing of XML data
 # 2010-09-20 troydwill@gmail.com
 
 HOST='http://stylerx.ath.cx'
-HOST='http://troywill.com:3001'
+# HOST='http://troywill.com:3001'
 FLASH_APP_API_KEY='b1b5bf7b7e8c99e0b8b720d4b17004833dc69cb5'
 URL="${HOST}/prescriptions.xml?api_key=${FLASH_APP_API_KEY}"
 XML="
 <prescription>
+  <user-id>4</user-id>
+  <!-- <user-security-key>a0757e04f0490c8868bfc0ed1c35882a19160916</user-security-key> -->
   <bust-inches>34</bust-inches>
   <hip-inches>34</hip-inches>
   <waist-inches>34</waist-inches>
@@ -21,8 +23,6 @@ XML="
   <red-spots>0</red-spots>
   <wrinkles>1</wrinkles>
   <other-skin-issues>0</other-skin-issues>
-  <user-id>4</user-id>
-  <!-- <user-security-key>a0757e04f0490c8868bfc0ed1c35882a19160916</user-security-key> -->
 </prescription>
 "
 
