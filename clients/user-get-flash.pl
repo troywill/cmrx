@@ -9,14 +9,38 @@ my $iphone_api_key = '784da8554937a966ec97aec8ed1ec659e25e334b';
 my $flash_api_key = '4356e1973d1cf09a450d2704afc35d0e5be2304e';
 my $url = "${host}/users/2.json?api_key=${flash_api_key}";
 
-my $user = &get_user;
-print ${$user}{'user'}{'email'}, "\n";
+
+my $user = {
+    first_name => 'Troy', 
+    last_name => 'Will',
+    email => 'troydwill@gmail.com'
+};
+
+my %HoH = (
+    user => $user
+    );
+
+# my $user = \(
+#     user =>  {
+# 	first_name => 'Troy', 
+# 	last_name => 'Will',
+# 	email => 'troydwill@gmail.com'
+#     }
+#     );
+
+# my $user = &get_user;
+# print ${$user}{'user'}{'email'}, "\n";
 &show_user_schema;
+&get_user;
+
+sub create_user {
+    
 
 sub get_user {
+    print "In sub get_user ...\n";
     my $ua = LWP::UserAgent->new();
     my $body = $ua->get($url);
-    # print keys%{$body};
+    print $body->decoded_content;
     # print "==> ${$body}{_msg}\n";
     # print "==> ${$body}{_content}\n";
     my $perl_scalar = from_json($body->decoded_content);
@@ -26,8 +50,22 @@ sub get_user {
 }
 
 sub show_user_schema {
-    
-    print <<HERE;
+
+  
+#  my $user = $HoH{'user'};
+  print "$user->{'email'}\n";
+  
+  print "Dumping current user data:\n";
+  # print the whole thing
+  # foreach my $family ( keys %HoH ) {
+  #   print "$family: { ";
+  #   for my $role ( keys %{ $HoH{$family} } ) {
+  #     print "$role=$HoH{$family}{$role} ";
+  #   }
+  #   print "}\n";
+  # }
+
+  my $user_schema =  <<HERE;
   create_table "users", :force => true do |t|
     t.string   "first_name",                :limit => 100, :default => ""
     t.string   "last_name",                 :limit => 100, :default => ""
@@ -42,6 +80,7 @@ sub show_user_schema {
     t.datetime "remember_token_expires_at"
   end
 HERE
+
 }
 __END__
 
