@@ -4,9 +4,12 @@ use strict;
 use JSON;
 
 my $server = 'http://troywill.com:3000';
+my $admin_email = 'michael.john.kirk@gmail.com';
+my $admin_password = 'password';
 
 # Randomly generate data that user will need to input
 my ( $first_name, $last_name, $email )  = &get_name_and_email;
+
 sub get_name_and_email {
     my @first_names = qw( Mary Patricia Linda Barbara Elizabeth Jennifer Maria Susan Margaret Dorothy );
     my @last_names = qw( Smith Johnson Williams Brown Jones Miller Davis García Rodríguez Wilson );
@@ -21,7 +24,22 @@ sub get_name_and_email {
     return ( $first_name, $last_name, $email );
 }    
 
+sub menu {
+    print "\n\n+-------------- Prescription RX Client Emulator  --------------+\n";
+    print "|\tQ to quit\n";
+  print "| 1. Show current User hash in JSON\n";
+  print "| 2. Edit User data\n";
+  print "| 3. Register a new User (POST JSON User hash to $server/users)\n";
+  print "| 4. Retrieve prescription .zip file\n";
+  print "| 5. Display registered users\n";
+  print "| Choice? ";
+}
 
+while ( 1 ) {
+  &menu;
+  chomp( my $input = <STDIN> );
+  last if ( $input eq 'q' or $input eq 'Q' );
+}
 
 exit;
 my $api_key = &get_api_key;
@@ -42,12 +60,6 @@ my %user = (
     );
 
 
-while ( 1 ) {
-  &menu;
-  chomp( my $input = <STDIN> );
-  last if ( $input eq 'q' or $input eq 'Q' );
-}
-
 sub get_bust {
     return 36
 }
@@ -59,18 +71,6 @@ sub get_waist {
 sub get_hips {
     return 36
 }
-
-sub menu {
-    print "\n\n+-------------- Prescription RX Client Emulator  --------------+\n";
-    print "|\tQ to quit\n";
-  print "| 1. Show current User hash in JSON\n";
-  print "| 2. Edit User data\n";
-  print "| 3. Register a new User (POST JSON User hash to $server/users)\n";
-  print "| 4. Retrieve prescription .zip file\n";
-  print "| 5. Display registered users\n";
-  print "| Choice? ";
-}
-
 
 exit;
 __END__
