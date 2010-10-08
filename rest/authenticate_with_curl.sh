@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BASE_URL='http://192.168.1.5:3000'
-CONTROLLER='welcome/login'
+CONTROLLER='sessions/new'
 HEADER_FILE='_fashionrx.header'
 COOKIE_FILE='cookie_file'
 RECORD_URL='http://192.168.1.5:3000/users/1'
@@ -29,3 +29,5 @@ clear_password () {
 authenticate
 write_cookie
 retrieve_record
+
+
