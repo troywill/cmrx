@@ -3,8 +3,21 @@ use warnings;
 use strict;
 use JSON;
 
+my %internal_state = (
+		      admin_email => "michael.john.kirk@gmail.com",
+		      admin_password => "password",
+		      cookie => ""
+		     );
+
+sub display_internal_state {
+  my $hash_ref = shift;
+}
+
+&display_internal_state ( \%internal_state );
+exit;
+
 my $server = 'http://troywill.com:3000';
-my $admin_email = 'michael.john.kirk@gmail.com';
+my $admin_email = '';
 my $admin_password = 'password';
 
 # Randomly generate data that user will need to input
@@ -22,7 +35,7 @@ sub get_name_and_email {
     $email = $email . random_regex('\d\d\d\d') . '@gmail.com';
     print "==> $random_number, $first_name, $last_name, $email\n";
     return ( $first_name, $last_name, $email );
-}    
+}
 
 sub menu {
     print "\n\n+-------------- Prescription RX Client Emulator  --------------+\n";
