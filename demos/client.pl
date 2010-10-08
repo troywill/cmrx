@@ -6,17 +6,24 @@ use JSON;
 my $server = 'http://troywill.com:3000';
 
 # Randomly generate data that user will need to input
-my $first_name = &get_first_name;
-sub get_first_name {
-    my @names = qw( Mary Patricia Linda Barbara Elizabeth Jennifer Maria Susan Margaret Dorothy );
+my ( $first_name, $last_name, $email )  = &get_name_and_email;
+sub get_name_and_email {
+    my @first_names = qw( Mary Patricia Linda Barbara Elizabeth Jennifer Maria Susan Margaret Dorothy );
+    my @last_names = qw( Smith Johnson Williams Brown Jones Miller Davis García Rodríguez Wilson );
     my $range = 10;
     my $random_number = int(rand($range));
-    my $first_name = $names[$random_number];
-    print "==> $random_number, $first_name\n";
-}
-my $last_name = &get_last_name;
-sub get_last_name {};
-my $email = &create_random_email;
+    my $first_name = $first_names[$random_number];
+    my $last_name = $last_names[int(rand($range))];
+    use String::Random qw(random_regex random_string);
+    my $email = lc($first_name);
+    $email = $email . random_regex('\d\d\d\d') . '@gmail.com';
+    print "==> $random_number, $first_name, $last_name, $email\n";
+    return ( $first_name, $last_name, $email );
+}    
+
+
+
+exit;
 my $api_key = &get_api_key;
 sub get_api_key {};
 my $security_key = &get_security_key;
@@ -63,18 +70,6 @@ sub menu {
   print "| 5. Display registered users\n";
   print "| Choice? ";
 }
-
-sub create_random_email {
-    use String::Random qw(random_regex random_string);
-# print random_regex('\d\d\d'); # Also prints 3 random digits
-# print random_string("...");   # Also prints 3 random printable characters
-    my $random_email = 'jane_' . random_regex('\d\d\d\d') . '@gmail.com';
-    print $random_email;
-#    my $ua = LWP::UserAgent->new();
-#    my $json_text = '{"user":{"last_name":"Last","first_name":"First","email":"' . $random_email . '"}}';
-#    my $response = $ua->post ( "$host/users.json?api_key=$flash_api_key", Content => $json_text, 'Content-Type' => 'application/json' );
-    return $random_email;
-}    
 
 
 exit;
