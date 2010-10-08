@@ -7,7 +7,7 @@ COOKIE_FILE='cookie_file'
 RECORD_URL='http://192.168.1.5:3000/users/1'
 
 authenticate () {
-    curl --data 'register_email=troydwill@gmail.com&password=passwd1' \
+    curl --data 'register_email=michael.john.kirk@gmail.com&password=password' \
 	--dump-header ${HEADER_FILE} \
 	${BASE_URL}/${CONTROLLER}
 }
