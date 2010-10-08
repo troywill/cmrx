@@ -4,17 +4,33 @@ use warnings;
 use strict;
 use JSON;
 
+########## Begin Section: Setup credentials ###########
+#### necessary to carry out RESTful administrative API calls, e.g. register a new user
+
 my $admin_email = 'michael.john.kirk@gmail.com';
+$admin_email = 'iphone_app@stylerx.net';
 my $admin_password = 'password';
+my $iphone_api_key = '3ed1d41ec357a2874e5b891846c84605c93812ad';
+my $iphone_security_key = '5ff275908a1d51b823a78a2da5c83c35a1bfad09';
 my $rails_host = 'http://troywill.com:3000';
 
 my %admin_internal_state = (
-		      admin_email => $admin_email,
-		      admin_password => $admin_password,
-		      cookie => "",
-		      rails_host => $rails_host
+			    admin_email => $admin_email,
+			    admin_password => $admin_password,
+			    cookie => "",
+			    rails_host => $rails_host,
+			    iphone_security_key => $iphone_security_key,
+			    iphone_api_key => $iphone_api_key
 		     );
 
+########## End Section: Setup credentials ###########
+
+########## Begin Section: Generate user data ###########
+# Randomly generate data that user will need to input
+my ( $first_name, $last_name, $email )  = &get_name_and_email;
+########## End Section: Generate user data ###########
+
+&display_admin_internal_state ( \%admin_internal_state );
 
 while ( 1 ) {
   &menu;
@@ -22,37 +38,8 @@ while ( 1 ) {
   last if ( $input eq 'q' or $input eq 'Q' );
 }
 
-&display_admin_internal_state ( \%admin_internal_state );
 
-sub display_admin_internal_state {
-  print "+---- display_admin_internal_state --------------+\n";
-  my $href = shift;
-  for my $key (keys %{$href}) {
-    print "| $key => ${$href}{$key}\n";
-  }
-  print "+------------------------------------------------+\n";
-}
-
-
-sub menu {
-    print "\n\n+-------------- Prescription RX Client Emulator  --------------+\n";
-    print "|\tQ to quit\n";
-  print "| 1. Show current User hash in JSON\n";
-  print "| 2. Edit User data\n";
-  print "| 3. Register a new User (POST JSON User hash to $server/users)\n";
-  print "| 4. Retrieve prescription .zip file\n";
-  print "| 5. Display registered users\n";
-  print "| Choice? ";
-}
-
-
-
-exit;
-my $server = 'http://troywill.com:3000';
-
-# Randomly generate data that user will need to input
-my ( $first_name, $last_name, $email )  = &get_name_and_email;
-
+######### Subroutines only below this line ########
 sub get_name_and_email {
     my @first_names = qw( Mary Patricia Linda Barbara Elizabeth Jennifer Maria Susan Margaret Dorothy );
     my @last_names = qw( Smith Johnson Williams Brown Jones Miller Davis García Rodríguez Wilson );
@@ -66,6 +53,28 @@ sub get_name_and_email {
     print "==> $random_number, $first_name, $last_name, $email\n";
     return ( $first_name, $last_name, $email );
 }
+
+sub display_admin_internal_state {
+  print "+---- display_admin_internal_state --------------+\n";
+  my $href = shift;
+  for my $key (keys %{$href}) {
+    print "| $key => ${$href}{$key}\n";
+  }
+  print "+------------------------------------------------+\n";
+}
+
+sub menu {
+  print "\n\n+-------------- Prescription RX Client Emulator  --------------+\n";
+  print "|\tQ to quit\n";
+  print "| 1. Show current User hash in JSON\n";
+  print "| 2. Edit User data\n";
+  print "| 3. Register a new User (POST JSON User hash to $admin_internal_state{'rails_host'}/users)\n";
+  print "| 4. Retrieve prescription .zip file\n";
+  print "| 5. Display registered users\n";
+  print "| Choice? ";
+}
+
+exit;
 
 exit;
 my $api_key = &get_api_key;
