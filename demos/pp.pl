@@ -3,7 +3,7 @@ use warnings;
 use strict;
 use JSON;
 
-my $server = 'http://troywill.com:4000';
+my $server = 'http://troywill.com:3000';
 my $register_ipv6 = '::ffff:192.0.2.128';
 my $ios_device_identifier = 'HG:A4:UI:90';
 my $ios_device_type_id = '1';
@@ -24,8 +24,6 @@ my %user = (
 		  height => $height
     }
     );
-
-
 
 sub menu {
     print "\n\n+-------------- Prescription RX Menu --------------+\n";
