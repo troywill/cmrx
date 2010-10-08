@@ -4,6 +4,81 @@ use strict;
 use JSON;
 
 my $server = 'http://troywill.com:3000';
+
+# Randomly generate data that user will need to input
+my $first_name = &get_first_name;
+sub get_first_name {
+    my @names = qw( Mary Patricia Linda Barbara Elizabeth Jennifer Maria Susan Margaret Dorothy );
+    my $range = 10;
+    my $random_number = int(rand($range));
+    my $first_name = $names[$random_number];
+    print "==> $random_number, $first_name\n";
+}
+my $last_name = &get_last_name;
+sub get_last_name {};
+my $email = &create_random_email;
+my $api_key = &get_api_key;
+sub get_api_key {};
+my $security_key = &get_security_key;
+sub get_security_key {};
+my $password = &get_password;
+sub get_password {};
+
+my $bust = &get_bust;
+my $waist = &get_waist;
+my $hips = &get_hips;
+
+my %user = (
+	      user => {
+		  email => $email,
+    }
+    );
+
+
+while ( 1 ) {
+  &menu;
+  chomp( my $input = <STDIN> );
+  last if ( $input eq 'q' or $input eq 'Q' );
+}
+
+sub get_bust {
+    return 36
+}
+
+sub get_waist {
+    return 24
+}
+
+sub get_hips {
+    return 36
+}
+
+sub menu {
+    print "\n\n+-------------- Prescription RX Client Emulator  --------------+\n";
+    print "|\tQ to quit\n";
+  print "| 1. Show current User hash in JSON\n";
+  print "| 2. Edit User data\n";
+  print "| 3. Register a new User (POST JSON User hash to $server/users)\n";
+  print "| 4. Retrieve prescription .zip file\n";
+  print "| 5. Display registered users\n";
+  print "| Choice? ";
+}
+
+sub create_random_email {
+    use String::Random qw(random_regex random_string);
+# print random_regex('\d\d\d'); # Also prints 3 random digits
+# print random_string("...");   # Also prints 3 random printable characters
+    my $random_email = 'jane_' . random_regex('\d\d\d\d') . '@gmail.com';
+    print $random_email;
+#    my $ua = LWP::UserAgent->new();
+#    my $json_text = '{"user":{"last_name":"Last","first_name":"First","email":"' . $random_email . '"}}';
+#    my $response = $ua->post ( "$host/users.json?api_key=$flash_api_key", Content => $json_text, 'Content-Type' => 'application/json' );
+    return $random_email;
+}    
+
+
+exit;
+__END__
 my $register_ipv6 = '::ffff:192.0.2.128';
 my $ios_device_identifier = 'HG:A4:UI:90';
 my $ios_device_type_id = '1';
@@ -25,16 +100,6 @@ my %user = (
     }
     );
 
-sub menu {
-    print "\n\n+-------------- Prescription RX Menu --------------+\n";
-    print "|\tQ to quit\n";
-  print "| 1. Show current User hash in JSON\n";
-  print "| 2. Edit User data\n";
-  print "| 3. Register a new User (POST JSON User hash to $server/users)\n";
-  print "| 4. Retrieve prescription .zip file\n";
-  print "| 5. Display registered users\n";
-  print "| Choice? ";
-}
 
 while ( 1 ) {
   &menu;
