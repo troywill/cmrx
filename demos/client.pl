@@ -1,24 +1,54 @@
 #!/usr/bin/env perl
+print `date`;
 use warnings;
 use strict;
 use JSON;
 
-my %internal_state = (
-		      admin_email => "michael.john.kirk@gmail.com",
-		      admin_password => "password",
-		      cookie => ""
+my $admin_email = 'michael.john.kirk@gmail.com';
+my $admin_password = 'password';
+my $rails_host = 'http://troywill.com:3000';
+
+my %admin_internal_state = (
+		      admin_email => $admin_email,
+		      admin_password => $admin_password,
+		      cookie => "",
+		      rails_host => $rails_host
 		     );
 
-sub display_internal_state {
-  my $hash_ref = shift;
+
+while ( 1 ) {
+  &menu;
+  chomp( my $input = <STDIN> );
+  last if ( $input eq 'q' or $input eq 'Q' );
 }
 
-&display_internal_state ( \%internal_state );
-exit;
+&display_admin_internal_state ( \%admin_internal_state );
 
+sub display_admin_internal_state {
+  print "+---- display_admin_internal_state --------------+\n";
+  my $href = shift;
+  for my $key (keys %{$href}) {
+    print "| $key => ${$href}{$key}\n";
+  }
+  print "+------------------------------------------------+\n";
+}
+
+
+sub menu {
+    print "\n\n+-------------- Prescription RX Client Emulator  --------------+\n";
+    print "|\tQ to quit\n";
+  print "| 1. Show current User hash in JSON\n";
+  print "| 2. Edit User data\n";
+  print "| 3. Register a new User (POST JSON User hash to $server/users)\n";
+  print "| 4. Retrieve prescription .zip file\n";
+  print "| 5. Display registered users\n";
+  print "| Choice? ";
+}
+
+
+
+exit;
 my $server = 'http://troywill.com:3000';
-my $admin_email = '';
-my $admin_password = 'password';
 
 # Randomly generate data that user will need to input
 my ( $first_name, $last_name, $email )  = &get_name_and_email;
@@ -35,23 +65,6 @@ sub get_name_and_email {
     $email = $email . random_regex('\d\d\d\d') . '@gmail.com';
     print "==> $random_number, $first_name, $last_name, $email\n";
     return ( $first_name, $last_name, $email );
-}
-
-sub menu {
-    print "\n\n+-------------- Prescription RX Client Emulator  --------------+\n";
-    print "|\tQ to quit\n";
-  print "| 1. Show current User hash in JSON\n";
-  print "| 2. Edit User data\n";
-  print "| 3. Register a new User (POST JSON User hash to $server/users)\n";
-  print "| 4. Retrieve prescription .zip file\n";
-  print "| 5. Display registered users\n";
-  print "| Choice? ";
-}
-
-while ( 1 ) {
-  &menu;
-  chomp( my $input = <STDIN> );
-  last if ( $input eq 'q' or $input eq 'Q' );
 }
 
 exit;
@@ -154,8 +167,8 @@ sub print_json_hash {
     my $json_text = encode_json $hash_ref;
     print $json_text;
 }
- 
-sub register_user {
+
+  sub register_user {
   my $json_text = encode_json \%user;
   my $curl_post_command = "curl --header 'Content-Type:application/json' --header 'Accept:application/json' --data '$json_text' $server/users 2>/dev/null";
   print "==> $curl_post_command\n\n";
