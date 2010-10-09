@@ -1,10 +1,14 @@
-#!/bin/bash
-
+#!/bin/sh
 BASE_URL='http://troywill.com:3000'
+RECORD_URL='http://troywill.com:3000/users/1'
+API_KEY='3ed1d41ec357a2874e5b891846c84605c93812ad'
+URL="http://troywill.com:3000/users/1.json?api_key=${API_KEY}"
+curl ${URL}
+exit
+
 CONTROLLER='sessions/new'
 HEADER_FILE='_fashionrx.header'
 COOKIE_FILE='cookie_file'
-RECORD_URL='http://troywill.com:3000/users/1'
 
 authenticate () {
     curl --data 'register_email=michael.john.kirk@gmail.co&password=passwor' \

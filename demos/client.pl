@@ -22,7 +22,6 @@ my %admin_internal_state = (
 			    iphone_security_key => $iphone_security_key,
 			    iphone_api_key => $iphone_api_key
 		     );
-
 ########## End Section: Setup credentials ###########
 
 ########## Begin Section: Generate user data ###########
