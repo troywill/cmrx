@@ -2,12 +2,13 @@
 # Monday, October 11, 2010 <troydwill@gmail.com>
 # Program to upload multiple file to StyleRX Amazon S3 server
 # Useage ./upload-stylerx dir1/file1 dir2/file2 ...
-# Note: uses "styletest" bucket for now. I created a "stylerx" bucket. Easy to created buckets
 # See http://amazon.rubyforge.org/ for documentation
+# To install Amazon S3 gem: sudo gem install --no-rdoc --no-ri aws-s3
 
+# Note: uses "styletest" bucket for now. I created a "stylerx" bucket. Easy to created buckets
 bucket = 'styletest'
 
-require 'rubygems'
+require 'rubygems' # Not necessary if Ruby version >= 1.9
 require 'aws/s3'
 
 # Keys from Amazon AWS console, https://console.aws.amazon.com/s3/home may show them
