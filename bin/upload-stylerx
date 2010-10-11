@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+# Monday, October 11, 2010 <troydwill@gmail.com>
+# Program to upload multiple file to StyleRX Amazon S3 server
+# Useage ./upload-stylerx dir1/file1 dir2/file2 ...
+# Note: uses "styletest" bucket for now. I created a "stylerx" bucket. Easy to created buckets
+# See http://amazon.rubyforge.org/ for documentation
+
+bucket = 'styletest'
+
+require 'rubygems'
+require 'aws/s3'
+
+# Keys from Amazon AWS console, https://console.aws.amazon.com/s3/home may show them
+access_key_id = 'AKIAI7UVVZ6VDYBDIVXA'
+secret_access_key = '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'
+
+AWS::S3::Base.establish_connection!(
+                                    :access_key_id     => access_key_id,
+                                    :secret_access_key => secret_access_key
+                                    )
+
+ARGV.each do|file|
+  puts "Uploading #{file} to #{bucket} bucket"
+  AWS::S3::S3Object.store(file, open(file), "#{bucket}")
+end
