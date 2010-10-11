@@ -1,5 +1,5 @@
 source ./tdw-lib.sh
-CONTROLLER_NAME='apple/recipt'
+CONTROLLER_NAME='apple/receipt'
 
 function up () {
 
